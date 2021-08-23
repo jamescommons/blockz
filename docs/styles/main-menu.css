@@ -1,0 +1,43 @@
+body {
+    background-color: #1f1f1f;
+    font-family: sans-serif;
+}
+
+.letter {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 60px;
+    font-weight: 500;
+    padding-top: 0px;
+    animation-name: title;
+    animation-duration: 500ms;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    animation-timing-function: ease-in-out;
+}
+
+#main-menu-content {
+    background-color: #1f1f1f;
+    display: grid;
+    justify-items: center;
+
+    /* Height set dynamically by a script
+    height: 100%;
+    width: 100%; */
+}
+
+#title {
+    display: flex;
+    height: 70px;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+#play-btn {
+    height: 70px;
+}
+
+/* Blockz animation */
+@keyframes title {
+    from {padding-top: 0px;}
+    to {padding-top: 10px;}
+}
