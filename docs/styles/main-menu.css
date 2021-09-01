@@ -20,8 +20,8 @@ body {
     display: grid;
     justify-items: center;
 
-    /* Height set dynamically by a script
-    height: 100%;
+    /* Height set dynamically by a script */
+    /* height: 100%;
     width: 100%; */
 }
 
@@ -34,6 +34,18 @@ body {
 
 #play-btn {
     height: 70px;
+}
+
+#sound-on-off-btn {
+    height: 70px;
+    padding-right: 40px;
+    padding-bottom: 30px;
+}
+
+#stats-btn {
+    height: 70px;
+    padding-left: 40px;
+    padding-bottom: 30px;
 }
 
 /* Blockz animation */
