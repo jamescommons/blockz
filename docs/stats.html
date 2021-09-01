@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <!-- Obligatory meta tags -->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Other neccessary tags -->
+        <meta name="description" content="A clone of the mobile game Ballz">
+        <meta name="theme-color" content="#1f1f1f">
+        <meta name="robots" content="index,follow">
+        <meta name="googlebot" content="index,follow">
+        <meta name="google" content="notranslate">
+
+        <!-- Links -->
+        <link rel="stylesheet" type="text/css" href="./styles/stats.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;500;700&display=swap" rel="stylesheet">
+
+        <title>Blockz - High Score</title>
+    </head>
+    <body style="background-color: #1f1f1f;">
+        <img
+            id="back-btn"
+            src="./assets/imgs/back.png"
+            alt="Back"
+            onclick="document.location.href = './index.html'">
+        </img>
+        <div id="grid-content">
+            <div id="spacer"></div>
+            <h1>High Score</h1>
+            <h3></h3>
+        </div>
+        <script>
+
+            // Get high score from local storage
+            if (localStorage.highScore === undefined) {
+                localStorage.highScore = '0';
+            }
+
+            document.querySelector('h3').innerText = localStorage.highScore;
+        </script>
+    </body>
+</html>

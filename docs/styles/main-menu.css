@@ -3,10 +3,6 @@ body {
     background-color: #1f1f1f;
 }
 
-.spacer {
-    height: 60px;
-}
-
 .settings-btn {
     height: 70px;
     padding-inline: 20px;
@@ -23,6 +19,14 @@ body {
     animation-iteration-count: infinite;
     animation-timing-function: ease-in-out;
     animation-direction: alternate;
+}
+
+#spacer-top {
+    height: 50px;
+}
+
+#spacer-bottom {
+    height: 60px;
 }
 
 #content {

@@ -21,7 +21,6 @@
         <title>Blockz - Main Menu</title>
     </head>
     <body style="background-color: #1f1f1f;">
-        
         <div id="content">
             <div id="spacer-top" class="spacer"></div>
             <div id="title">
@@ -65,6 +64,43 @@
             
             // Add resize event listener
             window.addEventListener('resize', resize);
+        </script>
+
+        <!-- Local storage script -->
+        <script>
+
+            // If user has never visited website
+            if (localStorage.soundOn === undefined) {
+                localStorage.soundOn = 'true';
+            }
+
+            // Set sound prefs
+            if (localStorage.soundOn === 'false') {
+                document.querySelector('#sound-on-off-btn')
+                        .setAttribute('src', './assets/imgs/sound-off.png');
+            }
+        </script>
+
+        <!-- Add event listers -->
+        <script>
+
+            // Sound prefs
+            document.querySelector('#sound-on-off-btn').addEventListener('click', () => {
+                if (localStorage.soundOn === 'true') {
+                    localStorage.soundOn = 'false';
+                    document.querySelector('#sound-on-off-btn')
+                            .setAttribute('src', './assets/imgs/sound-off.png');
+                } else {
+                    localStorage.soundOn = 'true';
+                    document.querySelector('#sound-on-off-btn')
+                            .setAttribute('src', './assets/imgs/sound-on.png');
+                }
+            });
+            
+            // Stats btn
+            document.querySelector('#stats-btn').addEventListener('click', () => {
+                document.location.href = './stats.html';
+            });
         </script>
     </body>
 </html>

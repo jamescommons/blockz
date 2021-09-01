@@ -1,0 +1,45 @@
+body {
+    font-family: Quicksand, sans-serif;
+    font-weight: 500;
+}
+
+h1 {
+    font-size: 70px;
+    color: #ca0349;
+    text-align: center;
+    animation-name: color-changer;
+    animation-timing-function: linear;
+    animation-duration: 10s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+h3 {
+    font-size: 50px;
+    color: #ffffff;
+    text-align: center;
+}
+
+#grid-content {
+    display: grid;
+    justify-content: center;
+}
+
+#back-btn {
+    grid-column: 0;
+    justify-self: start;
+    height: 70px;
+}
+
+#spacer {
+    height: 60px;
+}
+
+@keyframes color-changer {
+    0% { color: #ca0349; }
+    20% { color: #e5a428; }
+    40% { color: #1c66a4; }
+    60% { color: #149e7e; }
+    80% { color: #7cca3e; }
+    100% { color: #a40770; }
+}
