@@ -13,14 +13,58 @@
         <meta name="google" content="notranslate">
 
         <!-- Links -->
-        <link rel="stylesheet" type="text/css" href="styles/main-menu.css">
+        <link rel="stylesheet" type="text/css" href="./styles/main-menu.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;500;700&display=swap" rel="stylesheet">
 
         <title>Blockz - Main Menu</title>
     </head>
-    <body>
+    <body style="background-color: #1f1f1f;">
         
+        <div id="content">
+            <div id="spacer-top" class="spacer"></div>
+            <div id="title">
+                <div class="letter" style="color: #ca0349;">B</div>
+                <div class="letter" style="color: #e5a428;">l</div>
+                <div class="letter" style="color: #1c66a4;">o</div>
+                <div class="letter" style="color: #149e7e;">c</div>
+                <div class="letter" style="color: #7cca3e;">k</div>
+                <div class="letter" style="color: #a40770;">z</div>
+            </div>
+            <img
+                id="play-btn"
+                src="./assets/imgs/play-btn.png"
+                alt="Something went wrong...">
+            </img>
+            <div id="settings-btns">
+                <img
+                    id="sound-on-off-btn"
+                    class="settings-btn"
+                    src="./assets/imgs/sound-on.png"
+                    alt="...">
+                </img>
+                <img
+                    id="stats-btn"
+                    class="settings-btn"
+                    src="./assets/imgs/stats-btn.png"
+                    alt="...">
+                </img>
+            </div>
+            <div id="spacer-bottom" class="spacer"></div>
+        </div>
+        <script>
+
+            // Dynamically set height of content
+            let resize = () => {
+                let height = window.innerHeight;
+                document.querySelector('#content')
+                        .setAttribute('style', `height: ${height}px`);
+            }
+            resize();
+            
+            // Add resize event listener
+            window.addEventListener('resize', resize);
+        </script>
     </body>
 </html>

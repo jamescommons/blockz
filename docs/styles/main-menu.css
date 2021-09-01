@@ -1,0 +1,52 @@
+body {
+    font-family: sans-serif;
+    background-color: #1f1f1f;
+}
+
+.spacer {
+    height: 60px;
+}
+
+.settings-btn {
+    height: 70px;
+    padding-inline: 20px;
+}
+
+.letter {
+    font-family: Quicksand, sans-serif;
+    font-size: 70px;
+    font-weight: 500;
+    align-self: flex-start;
+    padding-top: 0;
+    animation-name: title-animation;
+    animation-duration: 500ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+    animation-direction: alternate;
+}
+
+#content {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
+
+#title {
+    display: flex;
+    justify-content: center;
+    height: 100px;
+}
+
+#settings-btns {
+    display: flex;
+    justify-content: space-between;
+}
+
+#play-btn {
+    height: 70px;
+}
+
+@keyframes title-animation {
+    from { padding-top: 0px; } 
+    to { padding-top: 10px; }
+}
