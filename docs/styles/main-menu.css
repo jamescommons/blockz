@@ -38,14 +38,14 @@ body {
 
 #sound-on-off-btn {
     height: 70px;
-    padding-right: 40px;
-    padding-bottom: 30px;
+    padding-right: 30px;
+    padding-bottom: 40px;
 }
 
 #stats-btn {
     height: 70px;
-    padding-left: 40px;
-    padding-bottom: 30px;
+    padding-left: 30px;
+    padding-bottom: 40px;
 }
 
 /* Blockz animation */
