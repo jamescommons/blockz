@@ -29,12 +29,9 @@ This game uses cookies to save your high score or progress.
 ## TODO
 * Add website icon that shows up in browser tab
 * Figure out music that should play in menu and in game
-* Add contact info to main menu
 * Use localStorage to track progress/highscore
 * Add a script to load a previous session if game never ended
-* Cookies never expire
-* Add tutorial to main menu
-
+* Add tutorial to main menu if needed later
 
 -------------------------------------
 ## Contact me

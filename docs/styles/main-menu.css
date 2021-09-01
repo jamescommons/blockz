@@ -26,7 +26,7 @@ body {
 }
 
 #spacer-bottom {
-    height: 60px;
+    height: 40px;
 }
 
 #content {
@@ -48,6 +48,13 @@ body {
 
 #play-btn {
     height: 70px;
+    justify-self: center;
+}
+
+#contact-me {
+    font-size: 14px; 
+    color: #ffffff;
+    grid-column-start: 0;
 }
 
 @keyframes title-animation {

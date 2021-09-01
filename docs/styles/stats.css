@@ -26,13 +26,13 @@ h3 {
 }
 
 #back-btn {
-    grid-column: 0;
-    justify-self: start;
+    padding-top: 50px;
+    justify-self: center;
     height: 70px;
 }
 
 #spacer {
-    height: 60px;
+    height: 50px;
 }
 
 @keyframes color-changer {
