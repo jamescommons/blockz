@@ -1,6 +1,8 @@
 # Blockz
 A clone of the mobile game "Ballz"
 
+**THIS PROJECT IS DISCONTINUED BECAUSE IT KIND OF SUCKED**
+
 -------------------------------------
 
 ## About Ballz
