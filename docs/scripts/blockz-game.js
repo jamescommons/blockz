@@ -5,7 +5,16 @@
 class BlockzGame {
     
     // Constructs a new game
-    constructor() {
+    constructor(json) {
+
+        // Constructs a current game store in local storage
+        if (json !== undefined) {
+            let game = JSON.parse(json);
+            this.grid = game.grid;
+            this.numBalls = game.numBalls;
+            this.score = game.score;
+            this.gameOver = game.gameOver;
+        }
 
         // 9 x 7
         this.grid = 
@@ -136,4 +145,4 @@ let testGame = () => {
     }
 }
 
-testGame();
+// testGame();

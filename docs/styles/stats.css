@@ -1,10 +1,10 @@
 body {
     font-family: Quicksand, sans-serif;
-    font-weight: 500;
 }
 
 h1 {
     font-size: 70px;
+    font-weight: 500;
     color: #ca0349;
     text-align: center;
     animation-name: color-changer;
@@ -16,6 +16,7 @@ h1 {
 
 h3 {
     font-size: 50px;
+    font-weight: 500;
     color: #ffffff;
     text-align: center;
 }
@@ -27,6 +28,7 @@ h3 {
 
 #back-btn {
     padding-top: 50px;
+    padding-left: 10px;
     justify-self: center;
     height: 70px;
 }
