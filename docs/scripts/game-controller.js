@@ -83,9 +83,14 @@ class GameController {
         }
     }
 
-    // Returns the slope
+    // Returns the angle
     getUserInput() {
+        let angle = 0;
 
+        // From 0-180 counter-clockwise
+        while (angle === 0) {
+
+        }
     }
 
     tick() {
@@ -129,18 +134,20 @@ class GameController {
         this.playRound(this.getUserInput());
     }
 
-    playRound(slope) {
+    playRound(angle) {
         this.currentlyRunning = true;
         this.ticks = 0;
         this.ballsCollected = 0;
         for (let i = 0; i < this.balls.length; i++) {
-            this.balls[i].setSlope(slope);
+            this.balls[i].setAngle(angle);
         }
         //this.timer = setInterval(this.tick, 1000 / fps);
     }
 
     getCollisions() {
-        // Change ball slopes, block health, etc.
+
+        // Change ball angless, block health, etc.
+        
     }
 
     endGame() {

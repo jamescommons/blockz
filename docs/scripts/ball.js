@@ -4,8 +4,8 @@
 class Ball {
     constructor() {
         
-        // Set the ball's slope to be 0 by default
-        this.slope = 0;
+        // Set the ball's angle to be 0 by default
+        this.angle = 0;
         this.xPos = 0;
         this.yPos = 0;
     }
@@ -15,16 +15,14 @@ class Ball {
         this.yPos = yPos;
     }
 
-    setSlope(slope) {
-        this.slope = slope;
+    setangle(angle) {
+        this.angle = angle;
     }
 
     move() {
-        let dx = Math.sqrt((ballSpeed * ballSpeed) / 
-                ((this.slope * this.slope) + 1));
-        let dy = this.slope * ballSpeed;
-        this.xPos += dx;
-        this.yPos += dy;
+        
+        // Move ball based on angle and speed
+        
     }
 
     // Pen is the graphics context for the canvas
