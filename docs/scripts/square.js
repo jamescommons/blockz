@@ -15,20 +15,6 @@ class Square {
 
         this.health = health;
         this.isExtraBall = this.health === -1;
-
-        if (this.health < 10) {
-            this.red = 229;
-            this.green = 164;
-            this.blue = 40;
-        } else if (this.health < 40) {
-            this.red = 150;
-            this.green = 150;
-            this.blue = 180;
-        } else {
-            this.red = 229;
-            this.green = 70;
-            this.blue = 40;
-        }
     }
 
     setWidth(width) {
@@ -89,21 +75,12 @@ class Square {
         }
 
         // Dynamically set color
-        if (this.health < gameController.score / 2) {
-            this.green += 3;
-        } else if (this.health < gameController.score) {
-            this.blue += 5;
-            this.green -= 3;
-            this.red -= 3;
-        } else {
-            if (this.red < 240) {
-                this.blue -= 3;
-                this.green -= 2;
-                this.red += 3;
-            }
-        }
+        let score = Number.parseInt(JSON.parse(localStorage.currentGame).score);
+        this.h = (this.health - score) * 4 + 35;
+        this.s = 80;
+        this.l = 60;
 
-        this.color = `rgb(${this.red}, ${this.green}, ${this.blue})`;
+        this.color = `hsl(${this.h}, ${this.s}%, ${this.l}%)`;
         pen.fillStyle = this.color;
         pen.beginPath();
         pen.fillRect(this.xPos, this.yPos, this.width, this.width);

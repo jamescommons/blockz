@@ -9,7 +9,7 @@
 
 // Global variables
 var fps = 30;
-var ballSpeed = 500 / fps;
+var ballSpeed = 800 / fps;
 var gameCanvas = document.getElementById('game-canvas');
 
 class GameController {

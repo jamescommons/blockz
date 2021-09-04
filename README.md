@@ -36,6 +36,7 @@ This game uses cookies to save your high score or progress.
 * Blocks color changing to be implemented
 * Blocks shifting down need animations
 * Rework aim line to be more faithful
+* Implement go faster button by increasing speed and fps
 
 -------------------------------------
 ## Contact me
