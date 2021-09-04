@@ -35,6 +35,7 @@ This game uses cookies to save your high score or progress.
 * Ball counter should count down
 * Blocks color changing to be implemented
 * Blocks shifting down need animations
+* Rework aim line to be more faithful
 
 -------------------------------------
 ## Contact me
