@@ -55,7 +55,7 @@ class BlockzGame {
                     firstRow.push(0);
             }
         }
-        this.grid[0] = firstRow;
+        this.grid[1] = firstRow;
     }
 
     advanceNextLevel() {
@@ -88,10 +88,10 @@ class BlockzGame {
         let ballPos = Math.floor(Math.random() * 7);
         nextRow[ballPos] = -1;
 
-        for (let i = 7; i >= 0; i--) {
+        for (let i = 7; i >= 1; i--) {
             this.grid[i + 1] = this.grid[i];
         }
-        this.grid[0] = nextRow;
+        this.grid[1] = nextRow;
 
         // Check health of last blocks
         for (let block of this.grid[8]) {

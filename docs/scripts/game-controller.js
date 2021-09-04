@@ -9,7 +9,7 @@
 
 // Global variables
 var fps = 30;
-var ballSpeed = 10 / fps;
+var ballSpeed = 500 / fps;
 var gameCanvas = document.getElementById('game-canvas');
 
 class GameController {
@@ -37,6 +37,9 @@ class GameController {
         }
 
         this.balls = [];
+
+        // Set to true when first ball is done moving
+        this.firstBallDone = false;
 
         // Load balls
         let numBalls = this.blockzGame.numBalls;
@@ -233,6 +236,18 @@ class GameController {
 
         // Move balls if above gutter, update ball position
         // if in gutter and first ball to be in gutter
+        
+        let numBalls = gameController.balls.length;
+        for (let i = 0; i < numBalls; i++) {
+            if (!gameController.balls[i].isDone) {
+                gameController.balls[i].move();
+            } else if (!gameController.firstBallDone) {
+                gameController.ballPos = (gameController.balls[i].xPos / 
+                        Number.parseInt(gameCanvas.getAttribute('width')) * 100);
+            } else {
+                gameController.balls[i].setPos(this.ballPos, this.gameHeight);
+            }
+        }
 
         // Clear screen
         gameController.renderer.pen.clearRect(0, 0, 
