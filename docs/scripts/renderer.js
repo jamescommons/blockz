@@ -38,7 +38,14 @@ class Renderer {
         );
     }
 
-    renderAimLines(slope, length) {
-
+    renderAimLines(dx, dy) {
+        this.pen.lineWidth = 5;
+        this.pen.lineCap = 'round';
+        this.pen.moveTo(this.gameController.ballPos, 
+                this.gameController.gameHeight - 7);
+        this.pen.strokeStyle = '#ffffff';
+        this.pen.lineTo(this.gameController.ballPos + dx, 
+                this.gameController.gameHeight - 7 + dy);
+        this.pen.stroke();
     }
 }

@@ -15,14 +15,17 @@ class Ball {
         this.yPos = yPos;
     }
 
-    setangle(angle) {
+    setAngle(angle) {
         this.angle = angle;
     }
 
     move() {
         
         // Move ball based on angle and speed
-        
+        let dx = Math.cos(this.angle);
+        let dy = Math.sin(this.angle);
+        this.xPos += dx;
+        this.yPos += dy;
     }
 
     // Pen is the graphics context for the canvas
