@@ -96,14 +96,14 @@ class GameController {
         let dy = 0;
         let mouseDown = false;
 
-        gameCanvas.addEventListener('mousedown', e => {
+        let mousedownHandler = e => {
             startX = e.offsetX;
             startY = e.offsetY;
             shouldDraw = true;
             mouseDown = true;
-        });
+        }
 
-        gameCanvas.addEventListener('mousemove', e => {
+        let mousemoveHandler = e => {
             endX = e.offsetX;
             endY = e.offsetY;
             dx = startX - endX;
@@ -113,9 +113,9 @@ class GameController {
             } else if (mouseDown) {
                 shouldDraw = true;
             }
-        });
+        }
 
-        gameCanvas.addEventListener('mouseup', e => {
+        let mouseupHandler = () => {
             shouldDraw = false;
             mouseDown = false;
 
@@ -133,10 +133,19 @@ class GameController {
             console.log(`Angle: ${angle * (180 / Math.PI)}°`);
 
             if (dy <= 0) {
+                gameCanvas.removeEventListener('mousedown', mousedownHandler);
+                gameCanvas.removeEventListener('mousemove', mousemoveHandler);
+                gameCanvas.removeEventListener('mouseup', mouseupHandler);
                 clearInterval(timer);
                 this.playRound(angle);
             }
-        });
+        }
+
+        gameCanvas.addEventListener('mousedown', mousedownHandler);
+
+        gameCanvas.addEventListener('mousemove', mousemoveHandler);
+
+        gameCanvas.addEventListener('mouseup', mouseupHandler);
 
         timer = setInterval(() => {
             this.renderer.pen.clearRect(0, 0, 
@@ -166,8 +175,12 @@ class GameController {
         gameController.getCollisions();
 
         // Move balls if above gutter, update ball position
-        // in in gutter and first ball to be in gutter
+        // if in gutter and first ball to be in gutter
 
+        // Clear screen
+        gameController.renderer.pen.clearRect(0, 0, 
+                Number.parseInt(gameCanvas.getAttribute('width')), 
+                Number.parseInt(gameCanvas.getAttribute('height')));
         gameController.renderer.render();
 
         gameController.ticks++;
@@ -177,6 +190,9 @@ class GameController {
 
         // Setup score
         this.score = this.blockzGame.score;
+        if (localStorage.highScore === undefined) {
+            localStorage.highScore = 0;
+        }
         if (this.score > localStorage.highScore) {
             localStorage.highScore = this.score;
         }
@@ -202,7 +218,7 @@ class GameController {
 
     getCollisions() {
 
-        // Change ball angless, block health, etc.
+        // Change ball angless, block health, collected balls, etc.
         
     }
 
