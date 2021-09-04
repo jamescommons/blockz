@@ -104,6 +104,7 @@ class GameController {
         }
 
         let mousemoveHandler = e => {
+            e.preventDefault();
             endX = e.offsetX;
             endY = e.offsetY;
             dx = startX - endX;
@@ -136,16 +137,20 @@ class GameController {
                 gameCanvas.removeEventListener('mousedown', mousedownHandler);
                 gameCanvas.removeEventListener('mousemove', mousemoveHandler);
                 gameCanvas.removeEventListener('mouseup', mouseupHandler);
+                gameCanvas.removeEventListener('touchstart', e => e.preventDefault());
+                gameCanvas.removeEventListener('touchmove', e => e.preventDefault());
+                gameCanvas.removeEventListener('touchend', e => e.preventDefault());
                 clearInterval(timer);
                 this.playRound(angle);
             }
         }
 
         gameCanvas.addEventListener('mousedown', mousedownHandler);
-
         gameCanvas.addEventListener('mousemove', mousemoveHandler);
-
         gameCanvas.addEventListener('mouseup', mouseupHandler);
+        gameCanvas.addEventListener('touchstart', e => e.preventDefault());
+        gameCanvas.addEventListener('touchmove', e => e.preventDefault());
+        gameCanvas.addEventListener('touchend', e => e.preventDefault());
 
         timer = setInterval(() => {
             this.renderer.pen.clearRect(0, 0, 
