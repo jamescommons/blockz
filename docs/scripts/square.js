@@ -15,6 +15,9 @@ class Square {
 
         this.health = health;
         this.isExtraBall = this.health === -1;
+
+        this.outerCircSize = 10;
+        this.outerCircIncrementer = 1;
     }
 
     setWidth(width) {
@@ -35,9 +38,7 @@ class Square {
         }
 
         // Draw extra ball instead
-        if (this.health === -1) {
-            this.outerCircSize = 10;
-            this.outerCircIncrementer = 1;
+        if (this.isExtraBall) {
             let drawCirc = () => {
             
                 // Draw animated outer circles
@@ -57,7 +58,7 @@ class Square {
                 pen.beginPath();
                 pen.arc(
                     this.xPos + (this.width / 2), 
-                    (this.yPos + (this.width / 2)), 
+                    this.yPos + (this.width / 2), 
                     this.outerCircSize, 
                     0, 2 * Math.PI
                 );
@@ -69,13 +70,13 @@ class Square {
                 }
                 this.outerCircSize += this.outerCircIncrementer;
             }
-            this.outCircTimer = setInterval(drawCirc, 50);
+            drawCirc();
 
             return;
         }
 
         // Dynamically set color
-        let score = Number.parseInt(JSON.parse(localStorage.currentGame).score);
+        let score = gameController.score;
         this.h = (this.health - score) * 4 + 35;
         this.s = 80;
         this.l = 60;

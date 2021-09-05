@@ -11,6 +11,10 @@ class Ball {
 
         // Flag that becomes true when ball comes back
         this.isDone = false;
+        this.hasStartedMoving = false;
+
+        this.yDirection = 1;
+        this.xDirection = 1;
     }
 
     setPos(xPos, yPos) {
@@ -27,8 +31,8 @@ class Ball {
         // Move ball based on angle and speed
         let dx = Math.cos(this.angle) * ballSpeed;
         let dy = Math.sin(this.angle) * ballSpeed;
-        this.xPos += dx;
-        this.yPos -= dy;
+        this.xPos += dx * this.xDirection;
+        this.yPos -= dy * this.yDirection;
     }
 
     // Pen is the graphics context for the canvas

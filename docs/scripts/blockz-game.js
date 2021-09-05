@@ -14,6 +14,8 @@ class BlockzGame {
             this.numBalls = game.numBalls;
             this.score = game.score;
             this.gameOver = game.gameOver;
+            this.position = game.position;
+            return;
         }
 
         // 9 x 7

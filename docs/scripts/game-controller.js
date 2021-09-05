@@ -73,6 +73,18 @@ class GameController {
         // Set size and position attributes
         for (let i = 0; i < this.balls.length; i++) {
             this.balls[i].setPos(this.ballPos, this.gameHeight);
+            this.balls[i].yDirection = 1;
+            this.balls[i].xDirection = 1;
+        }
+
+        // Load squares
+        this.squares = [];
+        for (let i = 0; i < 9; i++) {
+            let squareRow = [];
+            for (let j = 0; j < 7; j++) {
+                squareRow.push(new Square(this.blockzGame.grid[i][j]));
+            }
+            this.squares.push(squareRow);
         }
 
         for (let i = 0; i < this.squares.length; i++) {
@@ -224,6 +236,7 @@ class GameController {
             gameController.blockzGame.increaseBallCount(gameController.ballsCollected);
             gameController.blockzGame.advanceNextLevel();
             localStorage.currentGame = JSON.stringify(gameController.blockzGame);
+            this.blockzGame = new BlockzGame(localStorage.currentGame);
             if (gameController.blockzGame.gameOver) {
                 gameController.endGame();
             } else {
@@ -236,16 +249,25 @@ class GameController {
 
         // Move balls if above gutter, update ball position
         // if in gutter and first ball to be in gutter
-        
         let numBalls = gameController.balls.length;
+        if (gameController.ticks / 10 < numBalls && gameController.ticks % 10 === 0) {
+            gameController.balls[gameController.ticks / 10].hasStartedMoving = true;
+            gameController.balls[gameController.ticks / 10].isDone = false;
+        }
+
         for (let i = 0; i < numBalls; i++) {
-            if (!gameController.balls[i].isDone) {
+            if (!gameController.balls[i].isDone && 
+                    gameController.balls[i].hasStartedMoving) {
                 gameController.balls[i].move();
             } else if (!gameController.firstBallDone) {
-                gameController.ballPos = (gameController.balls[i].xPos / 
+                gameController.blockzGame.position = (gameController.balls[i].xPos / 
                         Number.parseInt(gameCanvas.getAttribute('width')) * 100);
+                gameController.firstBallDone = true;
             } else {
-                gameController.balls[i].setPos(this.ballPos, this.gameHeight);
+                gameController.ballPos = (gameController.blockzGame.position / 100) * 
+                        gameCanvas.getAttribute('width');
+                gameController.balls[i].setPos(gameController.ballPos, 
+                        gameController.gameHeight);
             }
         }
 
@@ -254,6 +276,16 @@ class GameController {
                 Number.parseInt(gameCanvas.getAttribute('width')), 
                 Number.parseInt(gameCanvas.getAttribute('height')));
         gameController.renderer.render();
+
+        // Check to see if all balls are done
+        for (let ball of gameController.balls) {
+
+            gameController.currentlyRunning = false;
+            if (!ball.isDone) {
+                gameController.currentlyRunning = true;
+                break;
+            }
+        }
 
         gameController.ticks++;
     }
@@ -275,13 +307,14 @@ class GameController {
         this.setScreenSize();
         this.initPlayers();
         this.renderer.render();
-        this.getUserInput()   
+        this.getUserInput();
     }
 
     playRound(angle) {
         this.currentlyRunning = true;
         this.ticks = 0;
         this.ballsCollected = 0;
+        this.firstBallDone = false;
         for (let i = 0; i < this.balls.length; i++) {
             this.balls[i].setAngle(angle);
         }
@@ -290,14 +323,27 @@ class GameController {
 
     getCollisions() {
 
-        // Change ball angless, block health, collected balls, etc.
-        
+        // Change ball angles, block health, collected balls, etc.
+        for (let ball of this.balls) {
+            if (ball.hasStartedMoving) {
+                if (ball.yPos <= 7) {
+                    ball.yDirection *= -1;
+                }
+                if (ball.xPos <= 7 || ball.xPos >= 
+                        Number.parseInt(gameCanvas.getAttribute('width')) - 7) {
+                    ball.xDirection *= -1;
+                }
+                if (ball.yPos >= gameController.gameHeight + 7) {
+                    ball.isDone = true;
+                }
+            }
+        }
     }
 
     endGame() {
 
         // Set current game to game over, etc.
-
+        localStorage.currentGame = 'game over';
     }
 }
 
