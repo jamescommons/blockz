@@ -18,8 +18,103 @@
         <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;500;700&display=swap" rel="stylesheet">
 
         <title>Blockz - Paused</title>
+
+        <style>
+            body {
+                font-family: Quicksand, sans-serif;
+                display: grid;
+                justify-content: center;
+            }
+
+            #pause {
+                text-align: center;
+                font-weight: 500;
+                font-size: 70px;
+                color: whitesmoke;
+            }
+
+            #spacer {
+                height: 30px;
+            }        
+            
+            #continue {
+                height: 90px;
+            }
+
+            #restart {
+                height: 72px;
+                padding-left: 10px;
+            }
+
+            #main-menu {
+                height: 75px;
+                padding-top: 10px;
+            }
+
+            #sound-on-off-btn {
+                height: 70px;
+                justify-self: center;
+                padding-top: 30px;
+            }
+        </style>
     </head>
     <body style="background-color: #1f1f1f;">
-        
+        <div id="spacer"></div>
+        <h1 id="pause">PAUSE</h1>
+        <img
+            id="continue"
+            src="./assets/imgs/continue.png"
+            alt="CONTINUE">
+        </img>
+        <img
+            id="restart"
+            src="./assets/imgs/restart.png"
+            alt="RESTART">
+        </img>
+        <img
+            id="main-menu"
+            src="./assets/imgs/main-menu.png"
+            alt="MAIN MENU">
+        </img>
+        <img
+            id="sound-on-off-btn"
+            class="settings-btn"
+            src="./assets/imgs/sound-on.png"
+            alt="...">
+        </img>
+        <script>
+
+            // Set sound prefs
+            if (localStorage.soundOn === 'false') {
+                document.querySelector('#sound-on-off-btn')
+                        .setAttribute('src', './assets/imgs/sound-off.png');
+            }
+
+            // Sound prefs
+            document.querySelector('#sound-on-off-btn').addEventListener('click', () => {
+                if (localStorage.soundOn === 'true') {
+                    localStorage.soundOn = 'false';
+                    document.querySelector('#sound-on-off-btn')
+                            .setAttribute('src', './assets/imgs/sound-off.png');
+                } else {
+                    localStorage.soundOn = 'true';
+                    document.querySelector('#sound-on-off-btn')
+                            .setAttribute('src', './assets/imgs/sound-on.png');
+                }
+            });
+
+            document.querySelector('#continue').addEventListener('click', () => {
+                document.location.href = './blockz.html';
+            });
+
+            document.querySelector('#restart').addEventListener('click', () => {
+                localStorage.currentGame = 'game over';
+                document.location.href = './blockz.html';
+            });
+
+            document.querySelector('#main-menu').addEventListener('click', () => {
+                document.location.href = './index.html';
+            });
+        </script>
     </body>
 </html>
