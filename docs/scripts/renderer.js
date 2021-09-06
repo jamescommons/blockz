@@ -51,4 +51,28 @@ class Renderer {
                 this.gameController.gameHeight - 7 + dy);
         this.pen.stroke();
     }
+
+    moveGridDown() {
+        for (let j = 0; j < this.gameController.squares.length; j++) {
+            for (let k = 0; k < this.gameController.squares[j].length; k++) {
+                this.gameController.squares[j][k].yPos -= 
+                        this.gameController.squares[j][k].width;
+            }
+        }
+        this.render();
+        this.animationCount = 0;
+        this.animationTimer = setInterval(() => {
+            for (let j = 0; j < this.gameController.squares.length; j++) {
+                for (let k = 0; k < this.gameController.squares[j].length; k++) {
+                    this.gameController.squares[j][k].yPos += 
+                            this.gameController.squares[j][k].width / 5;
+                }
+            }
+            if (this.animationCount >= 4) {
+                clearInterval(this.animationTimer);
+            } else {
+                this.animationCount++;
+            }
+        }, 1000 / fps);
+    }
 }

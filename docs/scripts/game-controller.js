@@ -103,6 +103,9 @@ class GameController {
                 );
             }
         }
+
+        // Move down animation
+        this.renderer.moveGridDown();
     }
 
     // Returns the angle
