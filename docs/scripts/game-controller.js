@@ -253,16 +253,21 @@ class GameController {
             return;
         }
 
+        // Draw numBalls
+        let numBalls = gameController.balls.length;
+        if (gameController.ticks / 10 < numBalls && gameController.ticks % 10 === 0) {
+                gameController.renderer.numBallsLeft--;
+        }
+
         for (let i = 0; i < physicsIters; i++) {
             gameController.getCollisions();
 
             // Move balls if above gutter, update ball position
             // if in gutter and first ball to be in gutter
-            let numBalls = gameController.balls.length;
+            numBalls = gameController.balls.length;
             if (gameController.ticks / 10 < numBalls && gameController.ticks % 10 === 0) {
                 gameController.balls[gameController.ticks / 10].hasStartedMoving = true;
                 gameController.balls[gameController.ticks / 10].isDone = false;
-                gameController.renderer.numBallsLeft--;
             }
 
             for (let i = 0; i < numBalls; i++) {
