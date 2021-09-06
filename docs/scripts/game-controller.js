@@ -273,7 +273,7 @@ class GameController {
                     gameController.blockzGame.position = (gameController.balls[i].xPos / 
                             Number.parseInt(gameCanvas.getAttribute('width')) * 100);
                     gameController.firstBallDone = true;
-                } else {
+                } else if (gameController.balls[i].hasStartedMoving) {
                     gameController.ballPos = (gameController.blockzGame.position / 100) * 
                             gameCanvas.getAttribute('width');
                     gameController.balls[i].setPos(gameController.ballPos, 
