@@ -54,7 +54,6 @@ body {
 #contact-me {
     font-size: 14px; 
     color: #ffffff;
-    grid-column-start: 0;
 }
 
 @keyframes title-animation {

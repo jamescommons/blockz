@@ -18,6 +18,7 @@ class Square {
 
         this.outerCircSize = 10;
         this.outerCircIncrementer = 1;
+        this.shouldIncrement = true;
     }
 
     setWidth(width) {
@@ -68,7 +69,11 @@ class Square {
                 } else if (this.outerCircSize >= 15) {
                     this.outerCircIncrementer = -1;
                 }
-                this.outerCircSize += this.outerCircIncrementer;
+                this.shouldIncrement = !this.shouldIncrement;
+
+                if (this.shouldIncrement) {
+                    this.outerCircSize += this.outerCircIncrementer;
+                }
             }
             drawCirc();
 

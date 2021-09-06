@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="en-US">
     <head>
+        <script>
+            // Set score
+            var score = localStorage.lastScore;
+        </script>
+
         <!-- Obligatory meta tags -->
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -26,7 +31,7 @@
                 justify-content: center;
             }
 
-            #pause {
+            #score {
                 text-align: center;
                 font-weight: 500;
                 font-size: 70px;
@@ -36,22 +41,20 @@
             #spacer {
                 height: 15px;
             }        
-            
-            #continue {
-                height: 90px;
-            }
 
             #restart {
                 height: 72px;
-                padding-left: 10px;
+                justify-self: center;
             }
 
             #main-menu {
                 height: 75px;
-                padding-top: 10px;
+                padding-top: 20px;
+                padding-left: 7px;
+                justify-self: center;
             }
 
-            #sound-on-off-btn {
+            #stats-btn {
                 height: 70px;
                 justify-self: center;
                 padding-top: 30px;
@@ -60,12 +63,7 @@
     </head>
     <body style="background-color: #1f1f1f;">
         <div id="spacer"></div>
-        <h1 id="pause">PAUSE</h1>
-        <img
-            id="continue"
-            src="./assets/imgs/continue.png"
-            alt="CONTINUE">
-        </img>
+        <h1 id="score"></h1>
         <img
             id="restart"
             src="./assets/imgs/restart.png"
@@ -77,44 +75,30 @@
             alt="MAIN MENU">
         </img>
         <img
-            id="sound-on-off-btn"
+            id="stats-btn"
             class="settings-btn"
-            src="./assets/imgs/sound-on.png"
+            src="./assets/imgs/stats-btn.png"
             alt="...">
         </img>
         <script>
 
-            // Set sound prefs
-            if (localStorage.soundOn === 'false') {
-                document.querySelector('#sound-on-off-btn')
-                        .setAttribute('src', './assets/imgs/sound-off.png');
-            }
-
-            // Sound prefs
-            document.querySelector('#sound-on-off-btn').addEventListener('click', () => {
-                if (localStorage.soundOn === 'true') {
-                    localStorage.soundOn = 'false';
-                    document.querySelector('#sound-on-off-btn')
-                            .setAttribute('src', './assets/imgs/sound-off.png');
-                } else {
-                    localStorage.soundOn = 'true';
-                    document.querySelector('#sound-on-off-btn')
-                            .setAttribute('src', './assets/imgs/sound-on.png');
-                }
-            });
-
-            document.querySelector('#continue').addEventListener('click', () => {
-                document.location.href = './blockz.html';
-            });
+            // Set score
+            document.querySelector('#score').innerText = score;
 
             document.querySelector('#restart').addEventListener('click', () => {
-                localStorage.currentGame = 'game over';
                 document.location.href = './blockz.html';
             });
 
             document.querySelector('#main-menu').addEventListener('click', () => {
                 document.location.href = './index.html';
             });
+
+            document.querySelector('#stats-btn').addEventListener('click', () => {
+                document.location.href = './stats.html';
+            });
+
+            // Restart game
+            localStorage.currentGame = 'game over';
         </script>
     </body>
 </html>

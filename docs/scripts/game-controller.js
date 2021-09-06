@@ -8,7 +8,7 @@
  * on the header. */
 
 // Global variables
-var fps = 30;
+var fps = 60;
 var ballSpeed = 800 / fps;
 var gameCanvas = document.getElementById('game-canvas');
 
@@ -69,6 +69,12 @@ class GameController {
     }
 
     initPlayers() {
+
+        // Load balls
+        this.balls = [];
+        for (let i = 0; i < this.blockzGame.numBalls; i++) {
+            this.balls.push(new Ball());
+        }
 
         // Set size and position attributes
         for (let i = 0; i < this.balls.length; i++) {
@@ -152,8 +158,8 @@ class GameController {
                 gameCanvas.removeEventListener('mousemove', mousemoveHandler);
                 gameCanvas.removeEventListener('mouseup', mouseupHandler);
                 gameCanvas.removeEventListener('touchstart', touchstartHandler);
-                gameCanvas.removeEventListener('touchmove', e => touchmoveHandler);
-                gameCanvas.removeEventListener('touchend', e => touchendHandler);
+                gameCanvas.removeEventListener('touchmove', touchmoveHandler);
+                gameCanvas.removeEventListener('touchend', touchendHandler);
                 clearInterval(timer);
                 this.playRound(angle);
             }
@@ -233,6 +239,7 @@ class GameController {
     tick() {
         if (!gameController.currentlyRunning) {
             clearInterval(gameController.timer);
+            localStorage.lastScore = gameController.score;
             gameController.blockzGame.increaseBallCount(gameController.ballsCollected);
             gameController.blockzGame.advanceNextLevel();
             localStorage.currentGame = JSON.stringify(gameController.blockzGame);
@@ -259,7 +266,8 @@ class GameController {
             if (!gameController.balls[i].isDone && 
                     gameController.balls[i].hasStartedMoving) {
                 gameController.balls[i].move();
-            } else if (!gameController.firstBallDone) {
+            } else if (!gameController.firstBallDone && 
+                    gameController.balls[i].hasStartedMoving) {
                 gameController.blockzGame.position = (gameController.balls[i].xPos / 
                         Number.parseInt(gameCanvas.getAttribute('width')) * 100);
                 gameController.firstBallDone = true;
@@ -279,7 +287,6 @@ class GameController {
 
         // Check to see if all balls are done
         for (let ball of gameController.balls) {
-
             gameController.currentlyRunning = false;
             if (!ball.isDone) {
                 gameController.currentlyRunning = true;
@@ -325,6 +332,8 @@ class GameController {
 
         // Change ball angles, block health, collected balls, etc.
         for (let ball of this.balls) {
+
+            // Check collision with edges of screen
             if (ball.hasStartedMoving) {
                 if (ball.yPos <= 7) {
                     ball.yDirection *= -1;
@@ -333,8 +342,29 @@ class GameController {
                         Number.parseInt(gameCanvas.getAttribute('width')) - 7) {
                     ball.xDirection *= -1;
                 }
-                if (ball.yPos >= gameController.gameHeight + 7) {
+                if (ball.yPos >= gameController.gameHeight + 1) {
                     ball.isDone = true;
+                }
+            }
+
+            // Check for collision with extra balls and squares
+            for (let i = 0; i < this.squares.length; i++) {
+                for (let j = 0; j < this.squares[i].length; j++) {
+                    let square = this.squares[i][j];
+
+                    // Check for collision with extra ball
+                    if (square.isExtraBall) {
+                        if (ball.xPos > square.xPos 
+                                && ball.xPos < square.xPos + square.width) {
+                            if (ball.yPos > square.yPos && 
+                                    ball.yPos < square.yPos + square.width) {
+                                square.health = 0;
+                                this.ballsCollected++;
+                                this.blockzGame.grid[i][j] = 0;
+                                square.isExtraBall = false;
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -343,7 +373,7 @@ class GameController {
     endGame() {
 
         // Set current game to game over, etc.
-        localStorage.currentGame = 'game over';
+        document.location.href = './restart.html';
     }
 }
 
