@@ -30,10 +30,10 @@ This game uses cookies to save your high score or progress.
 * Add website icon that shows up in browser tab
 * Figure out music that should play in menu and in game
 * Add tutorial to main menu if needed later
-* Ball counter should count down
 * Blocks shifting down need animations
 * Rework aim line to be more faithful
 * Implement go faster button by increasing speed and fps
+* Tighten up collision engine
 
 -------------------------------------
 ## Contact me

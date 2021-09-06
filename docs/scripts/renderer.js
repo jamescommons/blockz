@@ -8,6 +8,7 @@ class Renderer {
     constructor(gameController) {
         this.gameController = gameController;
         this.pen = gameCanvas.getContext('2d');
+        this.numBallsLeft = gameController.numBalls;
     }
 
     render() {
@@ -28,14 +29,16 @@ class Renderer {
         }
 
         // Draw number of balls
-        this.pen.fillStyle = '#ffffff';
-        this.pen.font = '15px sans-serif';
-        this.pen.textAlign = 'center';
-        this.pen.fillText(
-            `x${numBalls}`, 
-            this.gameController.ballPos - 10, 
-            this.gameController.gameHeight - 17
-        );
+        if (this.numBallsLeft > 0) {
+            this.pen.fillStyle = '#ffffff';
+            this.pen.font = '15px sans-serif';
+            this.pen.textAlign = 'center';
+            this.pen.fillText(
+                `x${this.numBallsLeft}`, 
+                this.gameController.ballPos - 10, 
+                this.gameController.gameHeight - 17
+            );
+        }
     }
 
     renderAimLines(dx, dy) {

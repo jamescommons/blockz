@@ -262,6 +262,7 @@ class GameController {
             if (gameController.ticks / 10 < numBalls && gameController.ticks % 10 === 0) {
                 gameController.balls[gameController.ticks / 10].hasStartedMoving = true;
                 gameController.balls[gameController.ticks / 10].isDone = false;
+                gameController.renderer.numBallsLeft--;
             }
 
             for (let i = 0; i < numBalls; i++) {
@@ -316,6 +317,7 @@ class GameController {
 
         this.setScreenSize();
         this.initPlayers();
+        this.renderer.numBallsLeft = this.balls.length;
         this.renderer.render();
         this.getUserInput();
     }
