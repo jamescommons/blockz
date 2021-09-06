@@ -9,7 +9,8 @@
 
 // Global variables
 var fps = 60;
-var ballSpeed = 800 / fps;
+var physicsIters = 3;
+var ballSpeed = 800 / fps / physicsIters;
 var gameCanvas = document.getElementById('game-canvas');
 
 class GameController {
@@ -252,30 +253,32 @@ class GameController {
             return;
         }
 
-        gameController.getCollisions();
+        for (let i = 0; i < physicsIters; i++) {
+            gameController.getCollisions();
 
-        // Move balls if above gutter, update ball position
-        // if in gutter and first ball to be in gutter
-        let numBalls = gameController.balls.length;
-        if (gameController.ticks / 10 < numBalls && gameController.ticks % 10 === 0) {
-            gameController.balls[gameController.ticks / 10].hasStartedMoving = true;
-            gameController.balls[gameController.ticks / 10].isDone = false;
-        }
+            // Move balls if above gutter, update ball position
+            // if in gutter and first ball to be in gutter
+            let numBalls = gameController.balls.length;
+            if (gameController.ticks / 10 < numBalls && gameController.ticks % 10 === 0) {
+                gameController.balls[gameController.ticks / 10].hasStartedMoving = true;
+                gameController.balls[gameController.ticks / 10].isDone = false;
+            }
 
-        for (let i = 0; i < numBalls; i++) {
-            if (!gameController.balls[i].isDone && 
-                    gameController.balls[i].hasStartedMoving) {
-                gameController.balls[i].move();
-            } else if (!gameController.firstBallDone && 
-                    gameController.balls[i].hasStartedMoving) {
-                gameController.blockzGame.position = (gameController.balls[i].xPos / 
-                        Number.parseInt(gameCanvas.getAttribute('width')) * 100);
-                gameController.firstBallDone = true;
-            } else {
-                gameController.ballPos = (gameController.blockzGame.position / 100) * 
-                        gameCanvas.getAttribute('width');
-                gameController.balls[i].setPos(gameController.ballPos, 
-                        gameController.gameHeight);
+            for (let i = 0; i < numBalls; i++) {
+                if (!gameController.balls[i].isDone && 
+                        gameController.balls[i].hasStartedMoving) {
+                    gameController.balls[i].move();
+                } else if (!gameController.firstBallDone && 
+                        gameController.balls[i].hasStartedMoving) {
+                    gameController.blockzGame.position = (gameController.balls[i].xPos / 
+                            Number.parseInt(gameCanvas.getAttribute('width')) * 100);
+                    gameController.firstBallDone = true;
+                } else {
+                    gameController.ballPos = (gameController.blockzGame.position / 100) * 
+                            gameCanvas.getAttribute('width');
+                    gameController.balls[i].setPos(gameController.ballPos, 
+                            gameController.gameHeight);
+                }
             }
         }
 
@@ -362,6 +365,58 @@ class GameController {
                                 this.ballsCollected++;
                                 this.blockzGame.grid[i][j] = 0;
                                 square.isExtraBall = false;
+                            }
+                        }
+                    }
+
+                    // Check for collision with square
+                    if (square.health > 0) {
+                        
+                        // Top side
+                        if (ball.xPos > square.xPos - 7 && 
+                                ball.xPos < square.xPos + square.width + 7) {
+                            if (ball.yPos > square.yPos - 7 && 
+                                    ball.yPos < square.yPos + 5) {
+                                square.health--;
+                                this.blockzGame.grid[i][j]--;
+                                ball.yDirection *= -1;
+                                break;
+                            }
+                        }
+
+                        // Bottom side 
+                        if (ball.xPos > square.xPos - 7 && 
+                                ball.xPos < square.xPos + square.width + 7) {
+                            if (ball.yPos < square.yPos + square.width + 7 && 
+                                    ball.yPos > square.yPos + square.width - 5) {
+                                square.health--;
+                                this.blockzGame.grid[i][j]--;
+                                ball.yDirection *= -1;
+                                break;
+                            }
+                        }
+
+                        // Left side
+                        if (ball.yPos > square.yPos - 7 && 
+                                ball.yPos < square.yPos + square.width + 7) {
+                            if (ball.xPos > square.xPos - 7 && 
+                                    ball.xPos < square.xPos + 5) {
+                                square.health--;
+                                this.blockzGame.grid[i][j]--;
+                                ball.xDirection *= -1;
+                                break;
+                            }
+                        }
+
+                        // Right side
+                        if (ball.yPos > square.yPos - 7 && 
+                                ball.yPos < square.yPos + square.width + 7) {
+                            if (ball.xPos < square.xPos + square.width + 7 && 
+                                    ball.xPos > square.xPos + square.width - 5) {
+                                square.health--;
+                                this.blockzGame.grid[i][j]--;
+                                ball.xDirection *= -1;
+                                break;
                             }
                         }
                     }

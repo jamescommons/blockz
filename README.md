@@ -29,11 +29,8 @@ This game uses cookies to save your high score or progress.
 ## TODO
 * Add website icon that shows up in browser tab
 * Figure out music that should play in menu and in game
-* Use localStorage to track progress/highscore
-* Add a script to load a previous session if game never ended
 * Add tutorial to main menu if needed later
 * Ball counter should count down
-* Blocks color changing to be implemented
 * Blocks shifting down need animations
 * Rework aim line to be more faithful
 * Implement go faster button by increasing speed and fps
