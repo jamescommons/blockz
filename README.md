@@ -34,6 +34,7 @@ This game uses cookies to save your high score or progress.
 * Tighten up collision engine
 * Add website to bookmarks
 * Fix sometimes absolutely annihilating blocks
+* Add more empty squares to BlockzGame
 
 -------------------------------------
 ## Contact me

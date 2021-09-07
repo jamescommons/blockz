@@ -9,6 +9,7 @@ class Renderer {
         this.gameController = gameController;
         this.pen = gameCanvas.getContext('2d');
         this.numBallsLeft = gameController.numBalls;
+        this.numsPos = gameController.ballPos - 10;
     }
 
     render() {
@@ -35,7 +36,7 @@ class Renderer {
             this.pen.textAlign = 'center';
             this.pen.fillText(
                 `x${this.numBallsLeft}`, 
-                this.gameController.ballPos - 10, 
+                this.numsPos, 
                 this.gameController.gameHeight - 17
             );
         }

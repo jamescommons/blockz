@@ -106,6 +106,8 @@ class GameController {
 
         // Move down animation
         this.renderer.moveGridDown();
+
+        this.renderer.numsPos = this.ballPos;
     }
 
     // Returns the angle
