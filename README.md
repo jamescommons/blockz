@@ -32,7 +32,6 @@ This game uses cookies to save your high score or progress.
 * Rework aim line to be more faithful
 * Implement go faster button by increasing speed and fps
 * Tighten up collision engine
-* Add website to bookmarks
 * Fix sometimes absolutely annihilating blocks
 * Maybe add more empty squares to BlockzGame
 * Add note about low power mode
